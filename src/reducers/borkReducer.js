@@ -1,24 +1,24 @@
 
-export default (state = {}, action) => {
-
-  var result = Object.assign({}, state);
+export default (state = { borkCount: 0 }, action) => {
 
   switch (action.type) {
 
     case 'BORK':
 
-      if (result.borkCount == null)
-	 result.borkCount = 0;
+      return Object.assign({}, state, { borkCount: state.borkCount + 1 });
 
-      result.borkCount++;
-      break;
+    case 'LoginResponseAction':
+
+      return Object.assign({}, state, { loginResponse: action.payload });
+
+    case 'LoginFailureAction':
+
+      return Object.assign({}, state, { loginError: action.payload });
 
     default:
-      result = state
-      break;
-  }
 
-  return result;
+      return state;
+  }
 }
 
 
